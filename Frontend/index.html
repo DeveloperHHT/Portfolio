@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--seo:head-->
+    <meta name="theme-color" content="#0b0d14" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script>
+      // Set theme and language before first paint so there is no flash.
+      try {
+        var t = localStorage.getItem('theme')
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.dataset.theme = t
+        // /tr/ is the Turkish page; anywhere else follows the saved choice, then the browser.
+        var l = /\/tr\/?$/.test(location.pathname) ? 'tr' : localStorage.getItem('lang')
+        if (l !== 'en' && l !== 'tr') {
+          l = (navigator.language || 'en').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en'
+        }
+        document.documentElement.lang = l
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+  </head>
+  <body>
+    <!--seo:body-->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

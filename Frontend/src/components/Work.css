@@ -1,0 +1,179 @@
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.work__item {
+  display: flex;
+}
+
+.work__name {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.work__text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.work__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+/* Private work: a blurred "redacted" preview with a lock on top */
+.private-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4) var(--space-4) var(--space-5);
+  border-style: dashed;
+  border-color: var(--border-strong);
+  overflow: hidden;
+}
+
+.private-card:hover {
+  --lift: -4px;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+.private-card__veil {
+  position: relative;
+  display: grid;
+  align-content: center;
+  gap: 0.55rem;
+  height: 7.5rem;
+  padding: 0 var(--space-5);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--violet) 28%, transparent), transparent 60%),
+    radial-gradient(120% 140% at 100% 100%, color-mix(in srgb, var(--cyan) 22%, transparent), transparent 60%),
+    var(--bg-elev);
+  border: 1px solid var(--border);
+}
+
+.private-card__bar {
+  height: 0.65rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--text) 38%, transparent);
+  filter: blur(3.5px);
+}
+
+.private-card__bar:nth-child(1) { width: 78%; }
+.private-card__bar:nth-child(2) { width: 56%; }
+.private-card__bar:nth-child(3) { width: 68%; }
+
+.private-card__lock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(2px);
+  background: color-mix(in srgb, var(--bg) 35%, transparent);
+}
+
+.private-card__lock svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0.6rem;
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--bg-elev);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.private-card:hover .private-card__lock svg {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+.private-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.private-card__label svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.private-card .work__name,
+.private-card .work__text,
+.private-card .work__tags {
+  padding-inline: var(--space-2);
+}
+
+/* Public work: plain cards that link to the repository */
+.work__grid--public {
+  margin-top: var(--space-5);
+}
+
+.public-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-5);
+}
+
+.public-card:hover {
+  --lift: -4px;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+
+.public-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.public-card__link svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.public-card__arrow {
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.public-card__link:hover .public-card__arrow,
+.public-card__link:focus-visible .public-card__arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 980px) {
+  .work__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .work__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,17 @@
+.DS_Store
+
+# Project-local tooling (nothing is installed globally)
+Frontend/.node/
+Frontend/.npm-cache/
+Frontend/.playwright/
+Frontend/node_modules/
+
+# Build and test output
+Frontend/dist/
+Frontend/*.tsbuildinfo
+Frontend/test-results/
+Frontend/playwright-report/
+
+# Private material, never published (CV files and similar)
+Docs/Private/
+*.pdf

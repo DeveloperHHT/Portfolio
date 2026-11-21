@@ -1,0 +1,36 @@
+/* Cursor-following edge glow and soft spotlight. Add .glow to a card and call trackPointer on pointermove. */
+.glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.glow::before,
+.glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.glow::before {
+  padding: 1px;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), var(--violet), var(--cyan) 45%, transparent 72%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+.glow::after {
+  z-index: -1;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), var(--accent-soft), transparent 65%);
+}
+
+.glow:hover::before,
+.glow:hover::after,
+.glow:focus-within::before,
+.glow:focus-within::after {
+  opacity: 1;
+}

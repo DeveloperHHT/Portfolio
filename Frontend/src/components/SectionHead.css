@@ -1,0 +1,86 @@
+.section-head {
+  margin-bottom: var(--space-7);
+  max-width: 48rem;
+  --head-from: var(--violet);
+  --head-to: var(--cyan);
+}
+
+.section-head--warm {
+  --head-from: var(--rose);
+  --head-to: var(--amber);
+}
+
+.section-head__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.section-head__num {
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(120deg, var(--head-from), var(--head-to));
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.section-head__line {
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--head-from), transparent);
+  transition: width 900ms var(--ease-out) 200ms;
+}
+
+.section-head.is-visible .section-head__line {
+  width: 3.5rem;
+}
+
+.section-head__title {
+  font-size: clamp(2rem, 4.4vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  background: linear-gradient(120deg, var(--text) 30%, var(--head-from) 70%, var(--head-to));
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 1400ms var(--ease-out) 150ms;
+}
+
+.section-head.is-visible .section-head__title {
+  background-position: 100% 0;
+}
+
+.section-head__intro {
+  margin-top: var(--space-4);
+  max-width: 40rem;
+  color: var(--text-muted);
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-head__line {
+    width: 3.5rem;
+  }
+}
+
+/* Section header without a number (second heading inside the same section) */
+.section-head--sub {
+  margin-top: var(--space-9);
+}
+
+@media (max-width: 720px) {
+  .section-head--sub {
+    margin-top: var(--space-8);
+  }
+}

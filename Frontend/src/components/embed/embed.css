@@ -1,0 +1,83 @@
+/* Facade for third-party players: a button first, the iframe only after the click. */
+.facade {
+  --facade-ink: #2b0d12;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.facade__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 1.3rem 0.55rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-warm);
+  color: var(--facade-ink);
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(251, 113, 133, 0.32);
+  transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-med) var(--ease-out),
+    filter var(--dur-med) var(--ease-out);
+}
+
+.facade__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(251, 113, 133, 0.45);
+  filter: saturate(1.1);
+}
+
+.facade__button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.facade__icon {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 1rem;
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.facade__button:hover .facade__icon {
+  transform: scale(1.12);
+}
+
+.facade__hint {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  line-height: 1.4;
+}
+
+.facade--loaded {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  animation: facade-in var(--dur-med) var(--ease-out);
+}
+
+.facade__frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.facade--loaded.is-ready .facade__frame {
+  opacity: 1;
+}
+
+@keyframes facade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

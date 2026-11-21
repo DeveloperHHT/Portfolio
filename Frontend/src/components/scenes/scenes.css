@@ -1,0 +1,294 @@
+/* ---------- Ride ---------- */
+.ride {
+  width: 100%;
+  height: 100%;
+  --ride-speed: 1;
+}
+
+.ride__sun-glow {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ride__layer {
+  will-change: transform;
+}
+
+.ride__bike {
+  transform-origin: 128px 188px;
+  transition: transform 700ms var(--ease-spring);
+}
+
+.ride__body {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.ride__wheel .ride__spokes {
+  transform-origin: 0 0;
+}
+
+.ride__scarf {
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+}
+
+.ride__shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.reveal.is-visible .ride__layer--far { animation: ride-scroll 38s linear infinite; }
+.reveal.is-visible .ride__layer--near { animation: ride-scroll 17s linear infinite; }
+.reveal.is-visible .ride__dashes { stroke-dasharray: 14 18; animation: ride-dashes 0.55s linear infinite; }
+.reveal.is-visible .ride__spokes { animation: ride-spin 0.42s linear infinite; }
+.reveal.is-visible .ride__body { animation: ride-rock 1.3s ease-in-out infinite; }
+.reveal.is-visible .ride__scarf { animation: ride-flutter 0.35s ease-in-out infinite alternate; }
+.reveal.is-visible .ride__speed line { animation: ride-streak 0.7s linear infinite; }
+.reveal.is-visible .ride__speed line:nth-child(2) { animation-delay: -0.25s; }
+.reveal.is-visible .ride__speed line:nth-child(3) { animation-delay: -0.5s; }
+.reveal.is-visible .ride__sun-glow { animation: ride-glow 5s ease-in-out infinite; }
+.reveal.is-visible .ride__beam { animation: ride-beam 2.4s ease-in-out infinite; }
+.reveal.is-visible .ride__stars circle { animation: twinkle 3s ease-in-out infinite; }
+.reveal.is-visible .ride__stars circle:nth-child(2) { animation-delay: -1s; }
+.reveal.is-visible .ride__stars circle:nth-child(3) { animation-delay: -2s; }
+
+/* Hover: open the throttle and pop a wheelie */
+.feature--ride:hover .ride__bike { transform: rotate(-6deg); }
+.feature--ride:hover .ride__layer--far { animation-duration: 16s; }
+.feature--ride:hover .ride__layer--near { animation-duration: 7s; }
+.feature--ride:hover .ride__dashes { animation-duration: 0.28s; }
+.feature--ride:hover .ride__spokes { animation-duration: 0.2s; }
+
+@keyframes ride-scroll { to { transform: translateX(-400px); } }
+@keyframes ride-dashes { to { stroke-dashoffset: 32; } }
+@keyframes ride-spin { to { transform: rotate(360deg); } }
+@keyframes ride-rock {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-1.8px) rotate(-0.6deg); }
+}
+@keyframes ride-flutter { from { transform: rotate(-7deg) scaleX(0.94); } to { transform: rotate(7deg) scaleX(1.06); } }
+@keyframes ride-streak {
+  from { transform: translateX(14px); opacity: 0; }
+  30% { opacity: 0.7; }
+  to { transform: translateX(-26px); opacity: 0; }
+}
+@keyframes ride-glow { 50% { transform: scale(1.1); opacity: 0.8; } }
+@keyframes ride-beam { 50% { opacity: 0.55; } }
+@keyframes twinkle { 50% { opacity: 0.2; } }
+
+/* ---------- Photography ---------- */
+.photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.photo__land {
+  width: 100%;
+  height: 100%;
+  transition: transform 1200ms var(--ease-out);
+}
+
+.feature--photo:hover .photo__land {
+  transform: scale(1.08);
+}
+
+.photo__sun {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.reveal.is-visible .photo__sun { animation: photo-sunrise 16s ease-in-out infinite alternate; }
+.reveal.is-visible .photo__reflection { animation: photo-reflect 16s ease-in-out infinite alternate; }
+.reveal.is-visible .photo__cloud--a { animation: photo-drift 46s linear infinite alternate; }
+.reveal.is-visible .photo__cloud--b { animation: photo-drift 62s linear infinite alternate-reverse; }
+.reveal.is-visible .photo__bird--a { animation: photo-fly 14s linear infinite; }
+.reveal.is-visible .photo__bird--b { animation: photo-fly 14s linear -5s infinite; }
+.reveal.is-visible .photo__ripples line { animation: photo-ripple 3.2s ease-in-out infinite; }
+.reveal.is-visible .photo__ripples line:nth-child(2) { animation-delay: -1s; }
+.reveal.is-visible .photo__ripples line:nth-child(3) { animation-delay: -2s; }
+.reveal.is-visible .photo__stars circle { animation: twinkle 3.4s ease-in-out infinite; }
+
+.photo__flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photo__hud {
+  position: absolute;
+  inset: 0;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.photo__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 0 solid rgba(255, 255, 255, 0.9);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.photo__corner--tl { top: 12px; left: 12px; border-top-width: 2px; border-left-width: 2px; }
+.photo__corner--tr { top: 12px; right: 12px; border-top-width: 2px; border-right-width: 2px; }
+.photo__corner--bl { bottom: 12px; left: 12px; border-bottom-width: 2px; border-left-width: 2px; }
+.photo__corner--br { bottom: 12px; right: 12px; border-bottom-width: 2px; border-right-width: 2px; }
+
+.feature--photo:hover .photo__corner--tl { transform: translate(5px, 5px); }
+.feature--photo:hover .photo__corner--tr { transform: translate(-5px, 5px); }
+.feature--photo:hover .photo__corner--bl { transform: translate(5px, -5px); }
+.feature--photo:hover .photo__corner--br { transform: translate(-5px, -5px); }
+
+/* Rule-of-thirds grid */
+.photo__grid {
+  position: absolute;
+  inset: 12px;
+  opacity: 0.5;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+    linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35));
+  background-size: 100% 1px, 100% 1px, 1px 100%, 1px 100%;
+  background-position: 0 33.33%, 0 66.66%, 33.33% 0, 66.66% 0;
+}
+
+.photo__focus {
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 54px;
+  height: 54px;
+  margin: -27px 0 0 -27px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  opacity: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.photo__focus-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.reveal.is-visible .photo__focus { animation: photo-af 6.5s var(--ease-out) infinite; }
+.reveal.is-visible .photo__flash { animation: photo-shutter 6.5s ease-out infinite; }
+.feature--photo:hover .photo__focus { animation-duration: 3.2s; }
+.feature--photo:hover .photo__flash { animation-duration: 3.2s; }
+
+.photo__meta {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+}
+.photo__meta--top { top: 14px; }
+.photo__meta--bottom { bottom: 14px; }
+.photo__meta--top span:last-child,
+.photo__meta--bottom .photo__exposure { margin-left: auto; }
+
+.photo__rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.photo__rec i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff5a5f;
+  box-shadow: 0 0 8px #ff5a5f;
+}
+
+.reveal.is-visible .photo__rec i { animation: twinkle 1.6s steps(2) infinite; }
+
+.photo__battery {
+  position: relative;
+  width: 20px;
+  height: 9px;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+}
+.photo__battery::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px 5px 1.5px 1.5px;
+  background: #34d399;
+}
+.photo__battery::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  top: 1.5px;
+  width: 2px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.photo__exposure {
+  display: inline-flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+.photo__exposure i {
+  width: 2px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.photo__exposure i.is-on {
+  height: 11px;
+  background: #fff;
+}
+
+@keyframes photo-sunrise {
+  from { transform: translateY(26px) scale(0.96); }
+  to { transform: translateY(-14px) scale(1.04); }
+}
+@keyframes photo-reflect {
+  from { transform: translateY(-3px) scaleX(0.8); opacity: 0.35; }
+  to { transform: translateY(4px) scaleX(1.15); opacity: 0.8; }
+}
+@keyframes photo-drift { from { transform: translateX(-24px); } to { transform: translateX(34px); } }
+@keyframes photo-fly {
+  from { transform: translate(-30px, 70px); }
+  50% { transform: translate(200px, 52px); }
+  to { transform: translate(440px, 66px); }
+}
+@keyframes photo-ripple { 50% { transform: translateX(6px); opacity: 0.15; } }
+
+/* Autofocus: hunts across the frame, then locks green just before the shutter */
+@keyframes photo-af {
+  0% { opacity: 0; transform: translate(-70px, -26px) scale(1.9); border-color: #fff; color: #fff; }
+  12% { opacity: 0.95; transform: translate(-70px, -26px) scale(1.7); }
+  34% { transform: translate(52px, 12px) scale(1.25); }
+  52% { transform: translate(-18px, -4px) scale(1.1); }
+  62% { transform: translate(0, 0) scale(1); border-color: #fff; color: #fff; }
+  66%, 84% { opacity: 1; transform: translate(0, 0) scale(0.94); border-color: #34d399; color: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25), 0 0 20px rgba(52, 211, 153, 0.5); }
+  92%, 100% { opacity: 0; transform: translate(0, 0) scale(1.4); border-color: #34d399; }
+}
+
+/* Shutter: a short white flash right after the lock */
+@keyframes photo-shutter {
+  0%, 74% { opacity: 0; }
+  76% { opacity: 0.85; }
+  86%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo__focus { opacity: 1; border-color: #34d399; color: #34d399; }
+}
